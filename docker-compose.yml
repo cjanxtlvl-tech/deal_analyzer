@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  deal-analyzer:
+    build: .
+    container_name: veecasa-deal-analyzer
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: node server.js

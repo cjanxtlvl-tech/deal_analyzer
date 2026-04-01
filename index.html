@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="VeeCasa RE Analyzer">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="Professional real estate investment analysis tool by VeeCasa">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/manifest+json,{
+        &quot;name&quot;: &quot;VeeCasa Real Estate Analyzer&quot;,
+        &quot;short_name&quot;: &quot;VeeCasa RE&quot;,
+        &quot;description&quot;: &quot;Professional real estate investment analysis tool&quot;,
+        &quot;start_url&quot;: &quot;/&quot;,
+        &quot;display&quot;: &quot;standalone&quot;,
+        &quot;background_color&quot;: &quot;#ffffff&quot;,
+        &quot;theme_color&quot;: &quot;#2563eb&quot;,
+        &quot;orientation&quot;: &quot;portrait&quot;,
+        &quot;icons&quot;: [
+            {
+                &quot;src&quot;: &quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT0lEQVR4nO3de3BU5RnH8e+7m2STEBJCuEMgXOQiKCqCVkVFq1Vr1Wq1VqvWy9hqa6e2M+202qlOO9NOO9NpO9NOq7W2VWutVq1WrVqvqFWrVUEQEBCQi9wJhITcNtndp3/sJiQkgWSTfc85e36fmZ0kZDfnPTn5zjnvOec9r6gqxphgCrldAWNcZQEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBFnK7Ar4hQghB3O16mIPU9v2k9fsU5EqJBMDWDL8AhAqLCI8eTVFpKUWjRlNcOprC0lKKRpaSN7SUvOIRhIsKCRcXkVdURLi4OPVzYSHh4iJCBQWufjBNgIaGiNfXE6uro3FvJfWVVdTv3k19ZRUNe3ZTV7mHmh07qN22jZpt26nbugWNx7tdZ39JbvQCEVlQUKJ/XLqWsqljqa2rpaa2juraWqprapOvtanX1bV11NQ2UFtXT029ftQ9BxBPRAjlFyQjlJ9PqKCAUH5B6nUB4YICJD+fcEEB4YICJD+fcGEBofz81OuCNhgC1DSiDQ009e8oisZiaGMjGm0kHo0Sj0ZR956vqRptjKKxGPFojHg0SqyujsaaOmJ1dcTqUu+b6uuJ1Sf/p+k/EydUXEzxyJEUjSpNnl1HllJcOorCkaMoGjGCwpGjKBo5kvzSUgpKS5FQblzbRJqaaNhbSf2e3dTv3kN95R7qKitpeL+S2m3bqN2xnZpt26nZvp2m2lq3q5tN76uqS7M5Ql9LlhCIyNCh5aXXLlmyjvETxvfruV1X10AkkiCRUCKROPFEgoZojPpojPpoIw3R5NfGWJzGWJxYPEE8kaAxFk++TiSIxRMkVIklEiQU4ok2r1UJSTKUIZF23xMJgUjy7CMSQU9C0P+z68GSkA9CkhGCjAJEQkkQBvQZxsXFBCH5u8kISZ1dk2eFoYO8RrjpDAESKiyki5+Fkz9LR0KQp/CRZdXcsLqBuAgFYWHQEOEzJYKGYFu1sjX10/yzhIT8kJAfEvJCQjgEecnvh0OQH+r4vbzke8mfhZBImz+F1s/dOsxp+Zlo8/+a/28ikfw/zf+rra/j0fYfj1gsRqSmhsamJhJxpampiaampuRRt6GJhoYGGhsb03z8zbJ5Zuh0yRK/B2BIyyV9v9qfKCqCD3KJdxsRFdQHzVIgmgxHc1habzuaJwTJOxYlLrRscbqQBTJ4V/u9EQBbc9x4TUebi2zLaqkxGcQCYALNAmACzQJgAs0CYALNAmACzQJgAs0CYALNAmACzQJgAs0CYALNAmACLecDICL/EZEf9OG5Mve37FeIyHARuVpE3uvm/kJgCDDagarF+7kfe0RkqohcIyKXiMiJGaqWEZE/Au8A653aTvUsBgRCRH4PXAqMBH4KPAM8raprBumXzwJ+DVwMRAex3K5UAZuBcTjzgdvTCOwClgL3AXuA7wA3isgXMzEoooiMAL4KzAZ+BLyNi5vJns0AAyEilwPnp/7K0S0Yzr/Aq4ADu8KD4GBzwMvAo8B21xYrEpFC4GhS4e5Cn4/VHgdg4PoUgBjuBsDJbe1qYAXwJslFlboNR1o/OFbcVhEJAceTDMHJ9DOoWQxAr0IQczsAg0xE5MILLxx77Q03XON2XbK11wsAvT1CeHoDFBJ5W0TudLsePhO2ABxEHXBzPB7/R3FxsdXP28IBqAcGqQx4wOplnGcB2N9Y4CngLyt/s/JCpwtvaGigtrb2QA/pz7iFRuSI+6Y/TAfgfZL30Y8AfgGs/uorq2eJCwMCxeNx6uvru7o7bIEw/dJhIczZs2f/Ytq0ace5USFTMHv27F/OmTPnGrfr4Wcdu0DFRZ8ELnWxPkboJz+5rWLNmjVfPOmkubWl7aY9NDn3UeTBdevW/UNViHbsLLQBAA0NDfz1r39dsWjRokGbTcXHGhobGz9z333333/SSSfNcrsy/iKddoE0Ho8/0NDQsMbZKvlSWUlJydWXXXbZvPvvv//5k046aZbb9cmKaDT6k9ra2o+WL1++JJFIxLq6J+DXacCdBqCkpGRh6fDSYkcr5C+jiouLZ3/xi188+/TTT//USSedNMvtCmXBEKBq3bp1C0eMGHE38H/AP92ulIs66wJJPB5/3+kq+U1VVVVFVVVVxcsvv/wyMLu0tLSsrKzsqPnz55919NFHz8utT3sYsBsaGxvXvvvuuzd88MEH33O7Qi7otF0SERkfCoU+sGa5Y8XFxWOPP/74c+bNm3feggULFowaNWqs23XqB2lqanq8qanpRrfr4jIfzQhmMsdPv8MuQu1fdhGaZSwAJtAsACbQLAAm0CwAJtAsACbQLAAm0PLcroAJtkTKnz4U1Wv2ACbQLADGc1xaSN8CYALNAmACzQJgAs0CYALNAmACzQJgvCeTKzCJyAoRudSWlDW5LJMBeAhY7Nr20OEK6wJ5ikRFJCQiYZFQvkheFywA3pKvUFT1FU4+EQMoJB4uoGFoJBZNRGMJ21z3w7hAAqW2eDjx0mER4hHyomHyYiG7CPYfGwkyQ1o7jIXEw4Ud7o9FQsSicRoaVBtj6hMhvDMOaOKQBcCpDIhMIDKRkLRe2SQSlHx8vJAU0H4YEr9lw5/jgLp1J8SuQYWmiIQ0FBJJ7cRCQkh0FfJHXSGRYcCNbtTTA+IMQvs/1gUaDCJLRGSJG0WXOFD6b5YVOdQDdLu9dwBYE2iwuBaAYJBWN2b7sCZQBrBmMINLJCRhtytxEKwJlAHs2sUEWa8C4PvlEo0xfS8m6y0Axhw+C4AJNAuACTQLgAk0C4AJNAuACTQLgAk0C4AJNAuACTQLgAk0C4AJNAuACTQLgDFelslxgc42xqfkCZHkkIcCIamLYEVx0VDs6Bfv8VoAoiKbNKEPJxI6XxPaFI9r3AfbIImRRaS5DdH8aMvxrPnx/t43nX+eHPBTiEJSBjDJ1Wr4RyYDkEBYGYnrWzG1J4xzfHYAmBJxfGrN4PJ8k8O4J5Ot7yZN6K8bE/pkA2qN/uGRAMxSJx5ukkdS2/0MJo8EIA9oAOrdrogxg80zTaDkxSdIqO3dQsYEmF2E+o8FAJdrYYyTsl6zTw5iW8Gvs14z0xs2NZIJNN8HQMJt/xXsYlTaoNtJfBuOVCIA9sH7gAXAG3ybgKzP9TFBYwEwgWYBMIFmATCBZgEwuUCyXYA1gUwuuAiYkc0CLAA+YzfCumdNIB9pIkGiEY018z2hQF89yFkAjKeSAkQLktOOhBD5LTBWRKaJyLzU/acBN2ejmvY8gA/FVWO1hH0fgDgwlOSEL0OBJmArsBfYraqqqlGgEdhDMhTZYE0gk3MktfVLJ6OJpAayBcBvQkBBkQXg0CQVALEFUjwhtdlLjR8IIYJKOBRSQYJgOxCRkMjLwHvA+8Ax2fzdFgC/aQqJxEIhjUtEJCQhUSFoS8SEReRY4B+DkYMBzYLH5gL1sXg0TjwRp6kpAdqgAWkCichyEbldVde4XReTexlIAAJEAAjyNFiisAe4BHhRVTe6XaGByXrNvI1dPQ5Gc3s/vg8ohQRAhCJgrltVMLklGxeKOXH1mEo8AArwItBVD2JUlv57Wgv0xyJjsp2CLHSBUnvddLsH+k2lEydQb3AKQlYD4K3x4cIBJRRAYMnOSbBkOwAyEGqDPBhP8/pKciZH+eLDNMb0M9u+DMDjwGO4vp+ecUm2A/AE8LODFWC7QRkv61/y/g+AHfw+5MtDx5dDnpmuJS8s7Qs+rPH/AHQzLQFE3gOQAAAAAElFTkSuQmCC&quot;,
+                &quot;sizes&quot;: &quot;192x192&quot;,
+                &quot;type&quot;: &quot;image/png&quot;
+            },
+            {
+                &quot;src&quot;: &quot;data:image/png;base64,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&quot;,
+                &quot;sizes&quot;: &quot;512x512&quot;,
+                &quot;type&quot;: &quot;image/png&quot;
+            }
+        ]
+    }">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT0lEQVR4nO3de3BU5RnH8e+7m2STEBJCuEMgXOQiKCqCVkVFq1Vr1Wq1VqvWy9hqa6e2M+202qlOO9NOO9NpO9NOq7W2VWutVq1WrVqvqFWrVUEQEBCQi9wJhITcNtndp3/sJiQkgWSTfc85e36fmZ0kZDfnPTn5zjnvOec9r6gqxphgCrldAWNcZQEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBZgEwgWYBMIFmATCBFnK7Ar4hQghB3O16mIPU9v2k9fsU5EqJBMDWDL8AhAqLCI8eTVFpKUWjRlNcOprC0lKKRpaSN7SUvOIRhIsKCRcXkVdURLi4OPVzYSHh4iJCBQWufjBNgIaGiNfXE6uro3FvJfWVVdTv3k19ZRUNe3ZTV7mHmh07qN22jZpt26nbugWNx7tdZ39JbvQCEVlQUKJ/XLqWsqljqa2rpaa2juraWqprapOvtanX1bV11NQ2UFtXT029ftQ9BxBPRAjlFyQjlJ9PqKCAUH5B6nUB4YICJD+fcEEB4YICJD+fcGEBofz81OuCNhgC1DSiDQ009e8oisZiaGMjGm0kHo0Sj0ZR956vqRptjKKxGPFojHg0RqyujsaaOmJ1dcTqUu+b6uuJ1Sf/p+k/EydUXEzxyJEUjSpNnl1HllJcOorCkaMoGjGCwpGjKBo5kvzSUgpKS5FQblzbRJqaaNhbSf2e3dTv3kN95R7qKitpeL+S2m3bqN2xnZpt26nZvp2m2lq3q5tN76uqS7M5Ql9LlhCIyNCh5aXXLlmyjvETxvfruV1X10AkkiCRUCKROPFEgoZojPpojPpoIw3R5NfGWJxYPEE8kaAxFk++TiSIxRMkVIklEiQU4ok2r1UJSTKUIZF23xMJgUjy7CMSQU9C0P+z68GSkA9CkhGCjAJEQkkQBvQZxsXFBCH5u8kISZ1dk2eFoYO8RrjpDAESKiyki5+Fkz9LR0KQp/CRZdXcsLqBuAgFYWHQEOEzJYKGYFu1sjX10/yzhIT8kJAfEvJCQjgEecnvh0OQH+r4vbzke8mfhZBImz+F1s/dOsxp+Zlo8/+a/28ikfw/zf+rra/j0fYfj1gsRqSmhsamJhJxpampiaampuRRt6GJhoYGGhsb03z8zbJ5Zuh0yRK/B2BIyyV9v9qfKCqCD3KJdxsRFdQHzVIgmgxHc1habzuaJwTJOxYlLrRscbqQBTJ4V/u9EQBbc9x4TUebi2zLaqkxGcQCYALNAmACzQJgAs0CYALNAmACzQJgAs0CYALNAmACzQJgAs0CYALNAmACLecDICL/EZEf9OG5Mve37FeIyHARuVpE3uvm/kJgCDDagarF+7kfe0RkqohcIyKXiMiJGaqWEZE/Au8A653aTvUsBgRCRH4PXAqMBH4KPAM8raprBumXzwJ+DVwMRAex3K5UAZuBcTjzgdvTCOwClgL3AXuA7wA3isgXMzEoooiMAL4KzAZ+BLyNi5vJns0AAyEilwPnp/7K0S0Yzr/Aq4ADu8KD4GBzwMvAo8B21xYrEpFC4GhS4e5Cn4/VHgdg4PoUgBjuBsDJbe1qYAXwJslFlboNR1o/OFbcVhEJAceTDMHJ9DOoWQxAr0IQczsAg0xE5MILLxx77Q03XON2XbK11wsAvT1CeHoDFBJ5W0TudLsePhO2ABxEHXBzPB7/R3FxsdXP28IBqAcGqQx4wOplnGcB2N9Y4CngLyt/s/JCpwtvaGigtrb2QA/pz7iFRuSI+6Y/TAfgfZL30Y8AfgGs/uorq2eJCwMCxeNx6uvru7o7bIEw/dJhIczZs2f/Ytq0ace5USFTMHv27F/OmTPnGrfr4Wcdu0DFRZ8ELnWxPkboJz+5rWLNmjVfPOmkubWl7aY9NDn3UeTBdevW/UNViHbsLLQBAA0NDfz1r39dsWjRokGbTcXHGhobGz9z333333/SSSfNcrsy/iKddoE0Ho8/0NDQsMbZKvlSWUlJydWXXXbZvPvvv//5k046aZbb9cmKaDT6k9ra2o+WL1++JJFIxLq6J+DXacCdBqCkpGRh6fDSYkcr5C+jiouLZ3/xi188+/TTT//USSedNMvtCmXBEKBq3bp1C0eMGHE38H/AP92ulIs66wJJPB5/3+kq+U1VVVVFVVVVxcsvv/wyMLu0tLSsrKzsqPnz55919NFHz8utT3sYsBsaGxvXvvvuuzd88MEH33O7Qi7otF0SERkfCoU+sGa5Y8XFxWOPP/74c+bNm3feggULFowaNWqs23XqB2lqanq8qanpRrfr4jIfzQhmMsdPv8MuQu1fdhGaZSwAJtAsACbQLAAm0CwAJtAsACbQLAAm0PLcroAJtkTKnz4U1Wv2ACbQLADGc1xaSN8CYALNAmACzQJgAs0CYALNAmACzQJgvCeTKzCJyAoRudSWlDW5LJMBeAhY7Nr20OEK6wJ5ikRFJCQiYZFQvkheFywA3pKvUFT1FU4+EQMoJB4uoGFoJBZNRGMJ21z3w7hAAqW2eDjx0mER4hHyomHyYiG7CPYfGwkyQ1o7jIXEw4Ud7o9FQsSicRoaVBtj6hMhvDMOaOKQBcCpDIhMIDKRkLRe2SQSlHx8vJAU0H4YEr9lw5/jgLp1J8SuQYWmiIQ0FBJJ7cRCQkh0FfJHXSGRYcCNbtTTA+IMQvs/1gUaDCJLRGSJG0WXOFD6b5YVOdQDdLu9dwBYE2iwuBaAYJBWN2b7sCZQBrBmMINLJCRhtytxEKwJlAHs2sUEWa8C4PvlEo0xfS8m6y0Axhw+C4AJNAuACTQLgAk0C4AJNAuACTQLgAk0C4AJNAuACTQLgAk0C4AJNAuACTQLgDFelslxgc42xqfkCZHkkIcCIamLYEVx0VDs6Bfv8VoAoiKbNKEPJxI6XxPaFI9r3AfbIImRRaS5DdH8aMvxrPnx/t43nX+eHPBTiEJSBjDJ1Wr4RyYDkEBYGYnrWzG1J4xzfHYAmBJxfGrN4PJ8k8O4J5Ot7yZN6K8bE/pkA2qN/uGRAMxSJx5ukkdS2/0MJo8EIA9oAOrdrogxg80zTaDkxSdIqO3dQsYEmF2E+o8FAJdrYYyTsl6zTw5iW8Gvs14z0xs2NZIJNN8HQMJt/xXsYlTaoNtJfBuOVCIA9sH7gAXAG3ybgKzP9TFBYwEwgWYBMIFmATCBZgEwuUCyXYA1gUwuuAiYkc0CLAA+YzfCumdNIB9pIkGiEY018z2hQF89yFkAjKeSAkQLktOOhBD5LTBWRKaJyLzU/acBN2ejmvY8gA/FVWO1hH0fgDgwlOSEL0OBJmArsBfYraqqqlGgEdhDMhTZYE0gk3MktfVLJ6OJpAayBcBvQkBBkQXg0CQVALEFUjwhtdlLjR8IIYJKOBRSQYJgOxCRkMjLwHvA+8Ax2fzdFgC/aQqJxEIhjUtEJCQhUSFoS8SEReRY4B+DkYMBzYLH5gL1sXg0TjwRp6kpAdqgAWkCichyEbldVde4XReTexlIAAJEAAjyNFiisAe4BHhRVTe6XaGByXrNvI1dPQ5Gc3s/vg8ohQRAhCJgrltVMLklGxeKOXH1mEo8AArwItBVD2JUlv57Wgv0xyJjsp2CLHSBUnvddLsH+k2lEydQb3AKQlYD4K3x4cIBJRRAYMnOSbBkOwAyEGqDPBhP8/pKciZH+eLDNMb0M9u+DMDjwGO4vp+ecUm2A/AE8LODFWC7QRkv61/y/g+AHfw+5MtDx5dDnpmuJS8s7Qs+rPH/AHQzLQFE3gOQAAAAAElFTkSuQmCC">
+    
+    <title>VeeCasa Deal Analyzer - Estimate Your Monthly Payment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Install Banner -->
+    <div id="installBanner" class="install-banner">
+        <p>📱 Install VeeCasa Real Estate Analyzer on your device for offline access!</p>
+        <button class="install-btn" onclick="installApp()">Install App</button>
+        <button class="dismiss-btn" onclick="dismissInstall()">Maybe Later</button>
+    </div>
+
+    <!-- Header -->
+    <div class="header-bar">
+        <div class="header-content">
+            <div class="logo">
+                <img src="logo/vc.png" alt="VeeCasa logo">
+            </div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#search">Products</a>
+                <a href="#results">Rates</a>
+                <a href="#analyze">How It Works</a>
+                <a href="#">FAQ</a>
+                <button class="save-btn" onclick="document.getElementById('leadForm').scrollIntoView({behavior:'smooth'})">Start My Quote →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1>Estimate Your Potential <span class="headline-accent">Investment</span></h1>
+        </div>
+
+        <section class="lead-section">
+            <div class="lead-header">
+                <h2>Get Matched with VeeCasa Lending Partners</h2>
+                <p>Secure, no-obligation follow-up for investment property financing scenarios.</p>
+            </div>
+            <form id="leadForm" class="lead-form" novalidate>
+                <input type="hidden" id="formStartedAt" name="startedAt">
+                <input type="text" id="website" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="lead-grid">
+                    <div class="input-group">
+                        <label for="leadName">Full Name</label>
+                        <input type="text" id="leadName" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="leadEmail">Email</label>
+                        <input type="email" id="leadEmail" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="leadPhone">Phone</label>
+                        <input type="tel" id="leadPhone" name="phone" placeholder="Optional">
+                    </div>
+                    <div class="input-group">
+                        <label for="leadGoal">Loan Goal</label>
+                        <select id="leadGoal" name="goal" required>
+                            <option value="">Select goal</option>
+                            <option value="purchase">Purchase</option>
+                            <option value="refinance">Refinance</option>
+                            <option value="cash-out">Cash-out Refinance</option>
+                            <option value="portfolio">Portfolio Expansion</option>
+                        </select>
+                    </div>
+                    <div class="input-group lead-notes">
+                        <label for="leadNotes">Notes</label>
+                        <input type="text" id="leadNotes" name="notes" placeholder="Property type, timeline, credit range, etc.">
+                    </div>
+                </div>
+                <button class="btn lead-submit" type="submit">Start My Quote →</button>
+                <p id="leadStatus" class="lead-status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <!-- Property Search Section -->
+        <div id="search" class="search-section">
+            <div class="search-header">
+                <h2>🔍 Search Comparable Properties</h2>
+                <span style="color: #6b7280; font-size: 0.9em;">Find similar deals in your area</span>
+            </div>
+            
+            <div class="search-grid">
+                <div class="input-group">
+                    <label>Property Address or Area</label>
+                    <input type="text" id="searchLocation" placeholder="e.g., 123 Main St, Austin, TX">
+                </div>
+                <div class="input-group">
+                    <label>Property Type</label>
+                    <select id="propertyType">
+                        <option value="all">All Types</option>
+                        <option value="single-family">Single Family</option>
+                        <option value="multi-family">Multi-Family</option>
+                        <option value="condo">Condo/Townhouse</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Price Range</label>
+                    <select id="priceRange">
+                        <option value="all">Any Price</option>
+                        <option value="0-200000">Under $200k</option>
+                        <option value="200000-400000">$200k - $400k</option>
+                        <option value="400000-600000">$400k - $600k</option>
+                        <option value="600000-1000000">$600k - $1M</option>
+                        <option value="1000000+">$1M+</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Bedrooms</label>
+                    <select id="bedrooms">
+                        <option value="all">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                        <option value="5">5+</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <button class="search-btn" onclick="searchProperties()">
+                        🔍 Search
+                    </button>
+                </div>
+            </div>
+
+            <div id="searchResults" class="search-results">
+                <div class="loading" id="searchLoading">
+                    <div class="spinner"></div>
+                    <p>Searching for properties...</p>
+                </div>
+                <div id="propertyList"></div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="analyze" class="dashboard">
+            <!-- Property Details Card -->
+            <div class="card">
+                <h2>
+                    📋 Property Details
+                    <span class="tooltip">
+                        <span class="help-icon">?</span>
+                        <span class="tooltiptext">Enter the basic property information and loan details here</span>
+                    </span>
+                </h2>
+                <div class="input-group">
+                    <label>Purchase Price ($)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="purchasePrice" value="350000" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>
+                        Down Payment (%)
+                        <span class="tooltip">
+                            <span class="help-icon">?</span>
+                            <span class="tooltiptext">Typical: 20-25% for investment properties</span>
+                        </span>
+                    </label>
+                    <input type="number" id="downPaymentPercent" value="20" min="0" max="100" inputmode="numeric">
+                </div>
+                <div class="input-group">
+                    <label>Loan Interest Rate (%)</label>
+                    <input type="number" id="interestRate" value="7.0" step="0.1" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>Loan Term (Years)</label>
+                    <select id="loanTerm">
+                        <option value="15">15 Years</option>
+                        <option value="30" selected>30 Years</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>
+                        Property Value Growth Rate (%/year)
+                        <span class="tooltip">
+                            <span class="help-icon">?</span>
+                            <span class="tooltiptext">Historical average: 3-4% annually</span>
+                        </span>
+                    </label>
+                    <input type="number" id="appreciationRate" value="3" step="0.1" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>Closing Costs ($)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="closingCosts" value="5000" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rental Income Card -->
+            <div class="card">
+                <h2>
+                    💰 Rental Income
+                    <span class="tooltip">
+                        <span class="help-icon">?</span>
+                        <span class="tooltiptext">Estimate your rental income and related factors</span>
+                    </span>
+                </h2>
+                <div class="input-group">
+                    <label>Monthly Rental Income ($)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="monthlyRent" value="2500" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Annual Rent Increase (%)</label>
+                    <input type="number" id="rentIncrease" value="3" step="0.1" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>
+                        Vacancy Rate (%)
+                        <span class="tooltip">
+                            <span class="help-icon">?</span>
+                            <span class="tooltiptext">Typical: 5-10% for most markets</span>
+                        </span>
+                    </label>
+                    <input type="number" id="vacancyRate" value="5" min="0" max="100" inputmode="numeric">
+                </div>
+                <div class="input-group">
+                    <label>Property Management Fee (%)</label>
+                    <input type="number" id="managementFee" value="8" min="0" max="100" inputmode="numeric">
+                </div>
+            </div>
+
+            <!-- Operating Expenses Card -->
+            <div class="card">
+                <h2>
+                    📊 Operating Expenses
+                    <span class="tooltip">
+                        <span class="help-icon">?</span>
+                        <span class="tooltiptext">Include all recurring property expenses</span>
+                    </span>
+                </h2>
+                <div class="input-group">
+                    <label>Property Tax (Annual $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="propertyTax" value="4200" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Insurance (Annual $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="insurance" value="1200" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>HOA Fees (Monthly $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="hoaFees" value="0" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>
+                        Maintenance & Repairs (Annual $)
+                        <span class="tooltip">
+                            <span class="help-icon">?</span>
+                            <span class="tooltiptext">Rule of thumb: 1% of property value annually</span>
+                        </span>
+                    </label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="maintenance" value="3500" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Utilities (Monthly $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="utilities" value="0" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Other Expenses (Annual $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="otherExpenses" value="500" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🗂 Scenario Manager</h2>
+                <div class="input-group">
+                    <label>Scenario Name</label>
+                    <input type="text" id="scenarioName" placeholder="e.g., Austin Duplex - Conservative" />
+                </div>
+                <div class="input-group">
+                    <label>Saved Scenarios</label>
+                    <select id="scenarioList">
+                        <option value="">Select a saved scenario</option>
+                    </select>
+                </div>
+                <div class="scenario-actions">
+                    <button class="btn" type="button" onclick="saveScenario()">Save</button>
+                    <button class="btn btn-secondary" type="button" onclick="loadSelectedScenario()">Load</button>
+                    <button class="btn btn-danger" type="button" onclick="deleteScenario()">Delete</button>
+                </div>
+                <p class="muted-text">Scenarios are stored in your browser on this device.</p>
+            </div>
+
+            <!-- Analysis Results Card -->
+            <div id="results" class="card" style="grid-column: span 2;">
+                <h2>📈 Investment Analysis Results</h2>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab(event, 'summary')">📊 Summary</button>
+                    <button class="tab" onclick="showTab(event, 'cashflow')">💵 Cash Flow</button>
+                    <button class="tab" onclick="showTab(event, 'roi')">📈 ROI Metrics</button>
+                    <button class="tab" onclick="showTab(event, 'projection')">📅 5-Year Projection</button>
+                    <button class="tab" onclick="showTab(event, 'stress')">🧪 Stress Test</button>
+                </div>
+
+                <div id="summary" class="tab-content active">
+                    <button class="btn" onclick="calculateAll()">
+                        🧮 Calculate Analysis
+                    </button>
+                    <div id="summaryResults" class="results" style="display: none;">
+                        <div class="metric-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">Total Investment</div>
+                                <div class="metric-value" id="totalInvestment">$0</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Monthly Payment</div>
+                                <div class="metric-value" id="monthlyPayment">$0</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Monthly Cash Flow</div>
+                                <div class="metric-value" id="monthlyCashFlow">$0</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Cap Rate</div>
+                                <div class="metric-value" id="capRate">0%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Expense Ratio</div>
+                                <div class="metric-value" id="expenseRatio">0%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">NOI Margin</div>
+                                <div class="metric-value" id="noiMargin">0%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Break-Even Rent</div>
+                                <div class="metric-value" id="breakEvenRent">$0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cashflow" class="tab-content">
+                    <div id="cashflowResults" class="results">
+                        <h3>Monthly Cash Flow Breakdown</h3>
+                        <div class="result-item">
+                            <span class="result-label">Gross Rental Income</span>
+                            <span class="result-value" id="grossIncome">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Vacancy Loss</span>
+                            <span class="result-value negative" id="vacancyLoss">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Management Fees</span>
+                            <span class="result-value negative" id="mgmtFees">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Effective Rental Income</span>
+                            <span class="result-value" id="effectiveIncome">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Mortgage Payment (P&I)</span>
+                            <span class="result-value negative" id="mortgagePayment">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Property Tax</span>
+                            <span class="result-value negative" id="monthlyTax">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Insurance</span>
+                            <span class="result-value negative" id="monthlyInsurance">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">HOA Fees</span>
+                            <span class="result-value negative" id="monthlyHOA">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Maintenance</span>
+                            <span class="result-value negative" id="monthlyMaintenance">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Utilities</span>
+                            <span class="result-value negative" id="monthlyUtilities">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Other Expenses</span>
+                            <span class="result-value negative" id="monthlyOther">-$0</span>
+                        </div>
+                        <div class="result-item" style="font-weight: bold; font-size: 1.1em; margin-top: 10px; padding-top: 10px; border-top: 2px solid var(--primary);">
+                            <span class="result-label">Net Monthly Cash Flow</span>
+                            <span class="result-value" id="netCashFlow">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="roi" class="tab-content">
+                    <div id="roiResults" class="results">
+                        <h3>Return on Investment Metrics</h3>
+                        <div class="result-item">
+                            <span class="result-label">Cash-on-Cash Return</span>
+                            <span class="result-value" id="cashOnCash">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Cap Rate</span>
+                            <span class="result-value" id="capRateROI">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Gross Rent Multiplier</span>
+                            <span class="result-value" id="grm">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Debt Service Coverage Ratio</span>
+                            <span class="result-value" id="dscr">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">1% Rule</span>
+                            <span class="result-value" id="onePercentRule">No</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Break-Even Ratio</span>
+                            <span class="result-value" id="breakEvenRatio">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Annual NOI</span>
+                            <span class="result-value" id="annualNOI">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total ROI (Year 1)</span>
+                            <span class="result-value" id="totalROI">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="projection" class="tab-content">
+                    <div id="projectionResults" class="results">
+                        <h3>5-Year Financial Projection</h3>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Property Value</th>
+                                        <th>Rental Income</th>
+                                        <th>Cash Flow</th>
+                                        <th>Equity</th>
+                                        <th>Total Return</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="projectionTable">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="stress" class="tab-content">
+                    <div class="results">
+                        <h3>Stress Scenario (Rent -10%, Vacancy +5%, Rate +1%)</h3>
+                        <div class="result-item">
+                            <span class="result-label">Stress Monthly Cash Flow</span>
+                            <span class="result-value" id="stressCashFlow">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Stress DSCR</span>
+                            <span class="result-value" id="stressDSCR">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Stress Cap Rate</span>
+                            <span class="result-value" id="stressCapRate">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Recommendation</span>
+                            <span class="result-value" id="stressNotes">Run analysis to evaluate resilience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Score Card -->
+            <div class="card">
+                <h2>🎯 Investment Score</h2>
+                <div id="investmentScore" class="score-display">
+                    <div class="score-circle">
+                        <svg width="150" height="150">
+                            <circle cx="75" cy="75" r="65" stroke="#e5e7eb" stroke-width="10" fill="none" />
+                            <circle id="scoreCircle" cx="75" cy="75" r="65" stroke="#667eea" stroke-width="10" fill="none"
+                                stroke-dasharray="408" stroke-dashoffset="408" />
+                        </svg>
+                        <div class="score-number" id="scoreValue">--</div>
+                    </div>
+                    <div class="score-label" id="scoreLabel">Calculate to see score</div>
+                    <div class="score-breakdown">
+                        <div class="score-breakdown-title">Score Guidelines:</div>
+                        <div class="score-range">
+                            <div class="score-range-indicator" style="background: #10b981;"></div>
+                            90-100: Excellent Investment
+                        </div>
+                        <div class="score-range">
+                            <div class="score-range-indicator" style="background: #3b82f6;"></div>
+                            75-89: Good Investment
+                        </div>
+                        <div class="score-range">
+                            <div class="score-range-indicator" style="background: #f59e0b;"></div>
+                            60-74: Fair Investment
+                        </div>
+                        <div class="score-range">
+                            <div class="score-range-indicator" style="background: #ef4444;"></div>
+                            Below 60: Poor Investment
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <button class="quick-action-btn" onclick="window.print()" title="Print Report">
+            🖨️
+        </button>
+        <button class="quick-action-btn" onclick="resetForm()" title="Reset All">
+            🔄
+        </button>
+    </div>
+
+        <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="VeeCasa RE Analyzer">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="Professional real estate investment analysis tool by VeeCasa">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/manifest+json,{
+        &quot;name&quot;: &quot;VeeCasa Real Estate Analyzer&quot;,
+        &quot;short_name&quot;: &quot;VeeCasa RE&quot;,
+        &quot;description&quot;: &quot;Professional real estate investment analysis tool&quot;,
+        &quot;start_url&quot;: &quot;/&quot;,
+        &quot;display&quot;: &quot;standalone&quot;,
+        &quot;background_color&quot;: &quot;#ffffff&quot;,
+        &quot;theme_color&quot;: &quot;#2563eb&quot;,
+        &quot;orientation&quot;: &quot;portrait&quot;,
+        &quot;icons&quot;: [
+            {
+                &quot;src&quot;: &quot;data:image/png;base64,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&quot;,
+                &quot;sizes&quot;: &quot;192x192&quot;,
+                &quot;type&quot;: &quot;image/png&quot;
+            },
+            {
+                &quot;src&quot;: &quot;data:image/png;base64,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&quot;,
+                &quot;sizes&quot;: &quot;512x512&quot;,
+                &quot;type&quot;: &quot;image/png&quot;
+            }
+        ]
+    }">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
+    
+    <title>VeeCasa Real Estate Analyzer - Smart Property Investment Tools</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #7c3aed;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Install Banner */
+        .install-banner {
+            display: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+        }
+
+        .install-banner.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .install-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .dismiss-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        /* Header */
+        .header-bar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .save-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .save-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .welcome-section h1 {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .welcome-section p {
+            color: #6b7280;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* Property Search Section */
+        .search-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-header h2 {
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        /* Search Results */
+        .search-results {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: center;
+            border: 1px solid var(--border);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .property-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .property-info h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .property-info p {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+
+        .property-metrics {
+            display: flex;
+            gap: 20px;
+            margin: 10px 0;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.85em;
+            color: #6b7280;
+        }
+
+        .metric-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .use-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .use-btn:hover {
+            background: #059669;
+        }
+
+        /* Main Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .help-icon {
+            font-size: 0.8em;
+            color: var(--primary);
+            cursor: help;
+            background: var(--light);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            font-size: 0.85em;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .input-group input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .input-group input::-webkit-outer-spin-button,
+        .input-group input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .input-prefix {
+            position: relative;
+        }
+
+        .input-prefix span {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-weight: 500;
+            pointer-events: none;
+        }
+
+        .input-prefix input {
+            padding-left: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #334155;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .scenario-actions {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .muted-text {
+            color: #6b7280;
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Results */
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .result-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .positive {
+            color: var(--success);
+        }
+
+        .negative {
+            color: var(--danger);
+        }
+
+        /* Metric Grid */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Table */
+        .comparison-table {
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            min-width: 600px;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            background: white;
+            white-space: nowrap;
+        }
+
+        .comparison-table tr:hover td {
+            background: #f9fafb;
+        }
+
+        /* Investment Score */
+        .score-display {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .score-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .score-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .score-label {
+            font-size: 1.2em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .score-breakdown {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f7fa;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .score-breakdown-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .score-range {
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .score-range-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 1.2em;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .nav-links a {
+                font-size: 0.9em;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .property-card {
+                grid-template-columns: 1fr;
+            }
+
+            .property-metrics {
+                justify-content: space-around;
+            }
+
+            .tabs {
+                font-size: 0.9em;
+            }
+
+            .tab {
+                padding: 8px 15px;
+            }
+
+            .comparison-table {
+                font-size: 0.85em;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 10px;
+            }
+
+            .welcome-section {
+                padding: 20px 15px;
+            }
+
+            .card {
+                padding: 20px 15px;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .quick-action-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .quick-action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Print Styles */
+        @media print {
+            .header-bar, .quick-actions, .search-section, .install-banner {
+                display: none !important;
+            }
+
+            .card {
+                page-break-inside: avoid;
+            }
+
+            body {
+                background: white;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+        }
+
+        /* PWA Standalone Mode Adjustments */
+        @media all and (display-mode: standalone) {
+            .install-banner {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Install Banner -->
+    <div id="installBanner" class="install-banner">
+        <p>📱 Install VeeCasa Real Estate Analyzer on your device for offline access!</p>
+        <button class="install-btn" onclick="installApp()">Install App</button>
+        <button class="dismiss-btn" onclick="dismissInstall()">Maybe Later</button>
+    </div>
+
+    <!-- Header -->
+    <div class="header-bar">
+        <div class="header-content">
+            <div class="logo">
+                🏡 VeeCasa Real Estate Analyzer
+            </div>
+            <div class="nav-links">
+                <a href="#search">Search Properties</a>
+                <a href="#analyze">Analyze</a>
+                <a href="#results">Results</a>
+                <button class="save-btn" onclick="saveAnalysis()">💾 Save Analysis</button>
+                <button class="save-btn" onclick="exportReportCSV()">📄 Export CSV</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1>Welcome to Your Smart Investment Analyzer</h1>
+            <p>Make data-driven real estate investment decisions with our comprehensive analysis tools. Search for comparable properties in your area, analyze cash flow, calculate ROI, and get an instant investment score to evaluate opportunities.</p>
+        </div>
+
+        <!-- Property Search Section -->
+        <div id="search" class="search-section">
+            <div class="search-header">
+                <h2>🔍 Search Comparable Properties</h2>
+                <span style="color: #6b7280; font-size: 0.9em;">Find similar deals in your area</span>
+            </div>
+            
+            <div class="search-grid">
+                <div class="input-group">
+                    <label>Property Address or Area</label>
+                    <input type="text" id="searchLocation" placeholder="e.g., 123 Main St, Austin, TX">
+                </div>
+                <div class="input-group">
+                    <label>Property Type</label>
+                    <select id="propertyType">
+                        <option value="all">All Types</option>
+                        <option value="single-family">Single Family</option>
+                        <option value="multi-family">Multi-Family</option>
+                        <option value="condo">Condo/Townhouse</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Price Range</label>
+                    <select id="priceRange">
+                        <option value="all">Any Price</option>
+                        <option value="0-200000">Under $200k</option>
+                        <option value="200000-400000">$200k - $400k</option>
+                        <option value="400000-600000">$400k - $600k</option>
+                        <option value="600000-1000000">$600k - $1M</option>
+                        <option value="1000000+">$1M+</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Bedrooms</label>
+                    <select id="bedrooms">
+                        <option value="all">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                        <option value="5">5+</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <button class="search-btn" onclick="searchProperties()">
+                        🔍 Search
+                    </button>
+                </div>
+            </div>
+
+            <div id="searchResults" class="search-results">
+                <div class="loading" id="searchLoading">
+                    <div class="spinner"></div>
+                    <p>Searching for properties...</p>
+                </div>
+                <div id="propertyList"></div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="analyze" class="dashboard">
+            <!-- Property Details Card -->
+            <div class="card">
+                <h2>
+                    📋 Property Details
+                    <span class="tooltip">
+                        <span class="help-icon">?</span>
+                        <span class="tooltiptext">Enter the basic property information and loan details here</span>
+                    </span>
+                </h2>
+                <div class="input-group">
+                    <label>Purchase Price ($)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="purchasePrice" value="350000" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>
+                        Down Payment (%)
+                        <span class="tooltip">
+                            <span class="help-icon">?</span>
+                            <span class="tooltiptext">Typical: 20-25% for investment properties</span>
+                        </span>
+                    </label>
+                    <input type="number" id="downPaymentPercent" value="20" min="0" max="100" inputmode="numeric">
+                </div>
+                <div class="input-group">
+                    <label>Loan Interest Rate (%)</label>
+                    <input type="number" id="interestRate" value="7.0" step="0.1" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>Loan Term (Years)</label>
+                    <select id="loanTerm">
+                        <option value="15">15 Years</option>
+                        <option value="30" selected>30 Years</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>
+                        Property Value Growth Rate (%/year)
+                        <span class="tooltip">
+                            <span class="help-icon">?</span>
+                            <span class="tooltiptext">Historical average: 3-4% annually</span>
+                        </span>
+                    </label>
+                    <input type="number" id="appreciationRate" value="3" step="0.1" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>Closing Costs ($)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="closingCosts" value="5000" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rental Income Card -->
+            <div class="card">
+                <h2>
+                    💰 Rental Income
+                    <span class="tooltip">
+                        <span class="help-icon">?</span>
+                        <span class="tooltiptext">Estimate your rental income and related factors</span>
+                    </span>
+                </h2>
+                <div class="input-group">
+                    <label>Monthly Rental Income ($)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="monthlyRent" value="2500" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Annual Rent Increase (%)</label>
+                    <input type="number" id="rentIncrease" value="3" step="0.1" inputmode="decimal">
+                </div>
+                <div class="input-group">
+                    <label>
+                        Vacancy Rate (%)
+                        <span class="tooltip">
+                            <span class="help-icon">?</span>
+                            <span class="tooltiptext">Typical: 5-10% for most markets</span>
+                        </span>
+                    </label>
+                    <input type="number" id="vacancyRate" value="5" min="0" max="100" inputmode="numeric">
+                </div>
+                <div class="input-group">
+                    <label>Property Management Fee (%)</label>
+                    <input type="number" id="managementFee" value="8" min="0" max="100" inputmode="numeric">
+                </div>
+            </div>
+
+            <!-- Operating Expenses Card -->
+            <div class="card">
+                <h2>
+                    📊 Operating Expenses
+                    <span class="tooltip">
+                        <span class="help-icon">?</span>
+                        <span class="tooltiptext">Include all recurring property expenses</span>
+                    </span>
+                </h2>
+                <div class="input-group">
+                    <label>Property Tax (Annual $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="propertyTax" value="4200" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Insurance (Annual $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="insurance" value="1200" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>HOA Fees (Monthly $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="hoaFees" value="0" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>
+                        Maintenance & Repairs (Annual $)
+                        <span class="tooltip">
+                            <span class="help-icon">?</span>
+                            <span class="tooltiptext">Rule of thumb: 1% of property value annually</span>
+                        </span>
+                    </label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="maintenance" value="3500" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Utilities (Monthly $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="utilities" value="0" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Other Expenses (Annual $)</label>
+                    <div class="input-prefix">
+                        <span>$</span>
+                        <input type="number" id="otherExpenses" value="500" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🗂 Scenario Manager</h2>
+                <div class="input-group">
+                    <label>Scenario Name</label>
+                    <input type="text" id="scenarioName" placeholder="e.g., Austin Duplex - Conservative" />
+                </div>
+                <div class="input-group">
+                    <label>Saved Scenarios</label>
+                    <select id="scenarioList">
+                        <option value="">Select a saved scenario</option>
+                    </select>
+                </div>
+                <div class="scenario-actions">
+                    <button class="btn" type="button" onclick="saveScenario()">Save</button>
+                    <button class="btn btn-secondary" type="button" onclick="loadSelectedScenario()">Load</button>
+                    <button class="btn btn-danger" type="button" onclick="deleteScenario()">Delete</button>
+                </div>
+                <p class="muted-text">Scenarios are stored in your browser on this device.</p>
+            </div>
+
+            <!-- Analysis Results Card -->
+            <div id="results" class="card" style="grid-column: span 2;">
+                <h2>📈 Investment Analysis Results</h2>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab(event, 'summary')">📊 Summary</button>
+                    <button class="tab" onclick="showTab(event, 'cashflow')">💵 Cash Flow</button>
+                    <button class="tab" onclick="showTab(event, 'roi')">📈 ROI Metrics</button>
+                    <button class="tab" onclick="showTab(event, 'projection')">📅 5-Year Projection</button>
+                    <button class="tab" onclick="showTab(event, 'stress')">🧪 Stress Test</button>
+                </div>
+
+                <div id="summary" class="tab-content active">
+                    <button class="btn" onclick="calculateAll()">
+                        🧮 Calculate Analysis
+                    </button>
+                    <div id="summaryResults" class="results" style="display: none;">
+                        <div class="metric-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">Total Investment</div>
+                                <div class="metric-value" id="totalInvestment">$0</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Monthly Payment</div>
+                                <div class="metric-value" id="monthlyPayment">$0</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Monthly Cash Flow</div>
+                                <div class="metric-value" id="monthlyCashFlow">$0</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Cap Rate</div>
+                                <div class="metric-value" id="capRate">0%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Expense Ratio</div>
+                                <div class="metric-value" id="expenseRatio">0%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">NOI Margin</div>
+                                <div class="metric-value" id="noiMargin">0%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Break-Even Rent</div>
+                                <div class="metric-value" id="breakEvenRent">$0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cashflow" class="tab-content">
+                    <div id="cashflowResults" class="results">
+                        <h3>Monthly Cash Flow Breakdown</h3>
+                        <div class="result-item">
+                            <span class="result-label">Gross Rental Income</span>
+                            <span class="result-value" id="grossIncome">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Vacancy Loss</span>
+                            <span class="result-value negative" id="vacancyLoss">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Management Fees</span>
+                            <span class="result-value negative" id="mgmtFees">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Effective Rental Income</span>
+                            <span class="result-value" id="effectiveIncome">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Mortgage Payment (P&I)</span>
+                            <span class="result-value negative" id="mortgagePayment">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Property Tax</span>
+                            <span class="result-value negative" id="monthlyTax">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Insurance</span>
+                            <span class="result-value negative" id="monthlyInsurance">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">HOA Fees</span>
+                            <span class="result-value negative" id="monthlyHOA">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Maintenance</span>
+                            <span class="result-value negative" id="monthlyMaintenance">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Utilities</span>
+                            <span class="result-value negative" id="monthlyUtilities">-$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Other Expenses</span>
+                            <span class="result-value negative" id="monthlyOther">-$0</span>
+                        </div>
+                        <div class="result-item" style="font-weight: bold; font-size: 1.1em; margin-top: 10px; padding-top: 10px; border-top: 2px solid var(--primary);">
+                            <span class="result-label">Net Monthly Cash Flow</span>
+                            <span class="result-value" id="netCashFlow">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="roi" class="tab-content">
+                    <div id="roiResults" class="results">
+                        <h3>Return on Investment Metrics</h3>
+                        <div class="result-item">
+                            <span class="result-label">Cash-on-Cash Return</span>
+                            <span class="result-value" id="cashOnCash">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Cap Rate</span>
+                            <span class="result-value" id="capRateROI">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Gross Rent Multiplier</span>
+                            <span class="result-value" id="grm">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Debt Service Coverage Ratio</span>
+                            <span class="result-value" id="dscr">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">1% Rule</span>
+                            <span class="result-value" id="onePercentRule">No</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Break-Even Ratio</span>
+                            <span class="result-value" id="breakEvenRatio">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Annual NOI</span>
+                            <span class="result-value" id="annualNOI">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total ROI (Year 1)</span>
+                            <span class="result-value" id="totalROI">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="projection" class="tab-content">
+                    <div id="projectionResults" class="results">
+                        <h3>5-Year Financial Projection</h3>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Property Value</th>
+                                        <th>Rental Income</th>
+                                        <th>Cash Flow</th>
+                                        <th>Equity</th>
+                                        <th>Total Return</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="projectionTable">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="stress" class="tab-content">
+                    <div class="results">
+                        <h3>Stress Scenario (Rent -10%, Vacancy +5%, Rate +1%)</h3>
+                        <div class="result-item">
+                            <span class="result-label">Stress Monthly Cash Flow</span>
+                            <span class="result-value" id="stressCashFlow">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Stress DSCR</span>
+                            <span class="result-value" id="stressDSCR">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Stress Cap Rate</span>
+                            <span class="result-value" id="stressCapRate">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Recommendation</span>
+                            <span class="result-value" id="stressNotes">Run analysis to evaluate resilience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Score Card -->
+            <div class="card">
+                <h2>🎯 Investment Score</h2>
+                <div id="investmentScore" class="score-display">
+                    <div class="score-circle">
+                        <svg width="150" height="150">
+                            <circle cx="75" cy="75" r="65" stroke="#e5e7eb" stroke-width="10" fill="none" />
+                            <circle id="scoreCircle" cx="75" cy="75" r="65" stroke="#667eea" stroke-width="10" fill="none"
+                                stroke-dasharray="408" stroke-dashoffset="408" />
+                        </svg>
+                        <div class="score-number" id="scoreValue">--</div>
+                    </div>
+                    <div class="score-label" id="scoreLabel">Calculate to see score</div>
+                    <div class="score-breakdown">
+                        <div class="score-breakdown-title">Score Guidelines:</div>
+                        <div class="score-range">
+                            <div class="score-range-indicator" style="background: #10b981;"></div>
+                            90-100: Excellent Investment
+                        </div>
+                        <div class="score-range">
+                            <div class="score-range-indicator" style="background: #3b82f6;"></div>
+                            75-89: Good Investment
+                        </div>
+                        <div class="score-range">
+                            <div class="score-range-indicator" style="background: #f59e0b;"></div>
+                            60-74: Fair Investment
+                        </div>
+                        <div class="score-range">
+                            <div class="score-range-indicator" style="background: #ef4444;"></div>
+                            Below 60: Poor Investment
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <button class="quick-action-btn" onclick="window.print()" title="Print Report">
+            🖨️
+        </button>
+        <button class="quick-action-btn" onclick="resetForm()" title="Reset All">
+            🔄
+        </button>
+    </div>
+
+    <script>
+        // PWA Installation
+        let deferredPrompt;
+        const SCENARIO_STORAGE_KEY = 'veecasa-deal-analyzer-scenarios';
+        let lastAnalysisSnapshot = null;
+        
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:text/javascript,' + encodeURIComponent(`
+                    const CACHE_NAME = 'veecasa-re-v1';
+                    const urlsToCache = [
+                        '/',
+                        '/index.html'
+                    ];
+
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then(cache => cache.addAll(urlsToCache))
+                        );
+                    });
+
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then(response => response || fetch(event.request))
+                        );
+                    });
+                `));
+            });
+        }
+
+        // Handle install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallBanner();
+        });
+
+        function showInstallBanner() {
+            const banner = document.getElementById('installBanner');
+            if (banner && !localStorage.getItem('installDismissed')) {
+                setTimeout(() => {
+                    banner.classList.add('show');
+                }, 2000);
+            }
+        }
+
+        function installApp() {
+            const banner = document.getElementById('installBanner');
+            banner.classList.remove('show');
+            
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+
+        function dismissInstall() {
+            const banner = document.getElementById('installBanner');
+            banner.classList.remove('show');
+            localStorage.setItem('installDismissed', 'true');
+        }
+
+        // Property Search Functionality
+        function searchProperties() {
+            const location = document.getElementById('searchLocation').value;
+            const propertyType = document.getElementById('propertyType').value;
+            const priceRange = document.getElementById('priceRange').value;
+            const bedrooms = document.getElementById('bedrooms').value;
+
+            if (!location) {
+                alert('Please enter a location to search');
+                return;
+            }
+
+            // Show loading state
+            document.getElementById('searchResults').style.display = 'block';
+            document.getElementById('searchLoading').classList.add('active');
+            document.getElementById('propertyList').innerHTML = '';
+
+            // Simulate API call with sample data
+            setTimeout(() => {
+                const sampleProperties = generateSampleProperties(location, propertyType, priceRange);
+                displaySearchResults(sampleProperties);
+                document.getElementById('searchLoading').classList.remove('active');
+            }, 1500);
+        }
+
+        function generateSampleProperties(location, type, priceRange) {
+            // Generate sample properties based on search criteria
+            const properties = [
+                {
+                    address: `${Math.floor(Math.random() * 900) + 100} Oak Street, ${location}`,
+                    price: 385000,
+                    rent: 2650,
+                    capRate: 6.8,
+                    beds: 3,
+                    baths: 2,
+                    sqft: 1850
+                },
+                {
+                    address: `${Math.floor(Math.random() * 900) + 100} Maple Avenue, ${location}`,
+                    price: 425000,
+                    rent: 2900,
+                    capRate: 7.2,
+                    beds: 4,
+                    baths: 2.5,
+                    sqft: 2200
+                },
+                {
+                    address: `${Math.floor(Math.random() * 900) + 100} Pine Court, ${location}`,
+                    price: 320000,
+                    rent: 2400,
+                    capRate: 7.5,
+                    beds: 3,
+                    baths: 2,
+                    sqft: 1650
+                },
+                {
+                    address: `${Math.floor(Math.random() * 900) + 100} Cedar Lane, ${location}`,
+                    price: 475000,
+                    rent: 3200,
+                    capRate: 6.5,
+                    beds: 4,
+                    baths: 3,
+                    sqft: 2500
+                },
+                {
+                    address: `${Math.floor(Math.random() * 900) + 100} Elm Street, ${location}`,
+                    price: 355000,
+                    rent: 2550,
+                    capRate: 7.0,
+                    beds: 3,
+                    baths: 2,
+                    sqft: 1750
+                }
+            ];
+
+            return properties;
+        }
+
+        function displaySearchResults(properties) {
+            const propertyList = document.getElementById('propertyList');
+            propertyList.innerHTML = '<h3 style="margin-bottom: 15px;">Found ' + properties.length + ' Comparable Properties</h3>';
+
+            properties.forEach(property => {
+                const card = document.createElement('div');
+                card.className = 'property-card';
+                card.innerHTML = `
+                    <div class="property-info">
+                        <h4>${property.address}</h4>
+                        <p>${property.beds} beds • ${property.baths} baths • ${property.sqft} sq ft</p>
+                        <div class="property-metrics">
+                            <div class="metric">
+                                <div class="metric-label">Price</div>
+                                <div class="metric-value">${formatCurrency(property.price)}</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">Est. Rent</div>
+                                <div class="metric-value">${formatCurrency(property.rent)}/mo</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-label">Cap Rate</div>
+                                <div class="metric-value">${property.capRate}%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="use-btn" onclick="useProperty(${property.price}, ${property.rent})">
+                        Use This Data
+                    </button>
+                `;
+                propertyList.appendChild(card);
+            });
+        }
+
+        function useProperty(price, rent) {
+            document.getElementById('purchasePrice').value = price;
+            document.getElementById('monthlyRent').value = rent;
+            calculateAll();
+            
+            // Scroll to analysis section
+            document.getElementById('analyze').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Tab functionality - Fixed
+        function showTab(event, tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+        }
+
+        // Calculation functions
+        function calculateMortgagePayment(principal, rate, years) {
+            const monthlyRate = rate / 100 / 12;
+            const numPayments = years * 12;
+            
+            if (monthlyRate === 0) {
+                return principal / numPayments;
+            }
+            
+            const payment = principal * 
+                (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+                (Math.pow(1 + monthlyRate, numPayments) - 1);
+            
+            return payment;
+        }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        function formatPercent(value) {
+            return value.toFixed(2) + '%';
+        }
+
+        function getInputSnapshot() {
+            return {
+                purchasePrice: parseFloat(document.getElementById('purchasePrice').value) || 0,
+                downPaymentPercent: parseFloat(document.getElementById('downPaymentPercent').value) || 20,
+                interestRate: parseFloat(document.getElementById('interestRate').value) || 7,
+                loanTerm: parseInt(document.getElementById('loanTerm').value, 10) || 30,
+                appreciationRate: parseFloat(document.getElementById('appreciationRate').value) || 3,
+                closingCosts: parseFloat(document.getElementById('closingCosts').value) || 0,
+                monthlyRent: parseFloat(document.getElementById('monthlyRent').value) || 0,
+                rentIncrease: parseFloat(document.getElementById('rentIncrease').value) || 3,
+                vacancyRate: parseFloat(document.getElementById('vacancyRate').value) || 5,
+                managementFee: parseFloat(document.getElementById('managementFee').value) || 8,
+                propertyTax: parseFloat(document.getElementById('propertyTax').value) || 0,
+                insurance: parseFloat(document.getElementById('insurance').value) || 0,
+                hoaFees: parseFloat(document.getElementById('hoaFees').value) || 0,
+                maintenance: parseFloat(document.getElementById('maintenance').value) || 0,
+                utilities: parseFloat(document.getElementById('utilities').value) || 0,
+                otherExpenses: parseFloat(document.getElementById('otherExpenses').value) || 0
+            };
+        }
+
+        function applyInputSnapshot(snapshot) {
+            Object.entries(snapshot).forEach(([key, value]) => {
+                const el = document.getElementById(key);
+                if (el) {
+                    el.value = value;
+                }
+            });
+        }
+
+        function getSavedScenarios() {
+            try {
+                const raw = localStorage.getItem(SCENARIO_STORAGE_KEY);
+                const parsed = raw ? JSON.parse(raw) : [];
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (_error) {
+                return [];
+            }
+        }
+
+        function setSavedScenarios(scenarios) {
+            localStorage.setItem(SCENARIO_STORAGE_KEY, JSON.stringify(scenarios));
+        }
+
+        function refreshScenarioList() {
+            const list = document.getElementById('scenarioList');
+            if (!list) return;
+
+            const scenarios = getSavedScenarios();
+            list.innerHTML = '<option value="">Select a saved scenario</option>';
+
+            scenarios.forEach((scenario) => {
+                const option = document.createElement('option');
+                option.value = scenario.id;
+                option.textContent = `${scenario.name} (${new Date(scenario.updatedAt).toLocaleDateString()})`;
+                list.appendChild(option);
+            });
+        }
+
+        function saveScenario() {
+            const nameInput = document.getElementById('scenarioName');
+            const name = (nameInput.value || '').trim();
+            if (!name) {
+                alert('Enter a scenario name before saving.');
+                return;
+            }
+
+            const scenarios = getSavedScenarios();
+            const snapshot = getInputSnapshot();
+            const existingIndex = scenarios.findIndex((item) => item.name.toLowerCase() === name.toLowerCase());
+            const payload = {
+                id: existingIndex >= 0 ? scenarios[existingIndex].id : `scenario-${Date.now()}`,
+                name,
+                updatedAt: new Date().toISOString(),
+                inputs: snapshot
+            };
+
+            if (existingIndex >= 0) {
+                scenarios[existingIndex] = payload;
+            } else {
+                scenarios.push(payload);
+            }
+
+            setSavedScenarios(scenarios);
+            refreshScenarioList();
+            document.getElementById('scenarioList').value = payload.id;
+            alert('Scenario saved.');
+        }
+
+        function loadSelectedScenario() {
+            const selectedId = document.getElementById('scenarioList').value;
+            if (!selectedId) {
+                alert('Choose a scenario to load.');
+                return;
+            }
+
+            const scenarios = getSavedScenarios();
+            const selected = scenarios.find((item) => item.id === selectedId);
+            if (!selected) {
+                alert('Scenario not found.');
+                return;
+            }
+
+            applyInputSnapshot(selected.inputs);
+            document.getElementById('scenarioName').value = selected.name;
+            calculateAll();
+        }
+
+        function deleteScenario() {
+            const selectedId = document.getElementById('scenarioList').value;
+            if (!selectedId) {
+                alert('Choose a scenario to delete.');
+                return;
+            }
+
+            const scenarios = getSavedScenarios();
+            const selected = scenarios.find((item) => item.id === selectedId);
+            if (!selected) {
+                return;
+            }
+
+            if (!confirm(`Delete scenario "${selected.name}"?`)) {
+                return;
+            }
+
+            const remaining = scenarios.filter((item) => item.id !== selectedId);
+            setSavedScenarios(remaining);
+            refreshScenarioList();
+            document.getElementById('scenarioName').value = '';
+        }
+
+        function renderStressTest(base) {
+            const stressRent = base.monthlyRent * 0.9;
+            const stressVacancyRate = Math.min(base.vacancyRate + 5, 99);
+            const stressRate = base.interestRate + 1;
+
+            const stressVacancyLoss = stressRent * (stressVacancyRate / 100);
+            const stressEffectiveRent = stressRent - stressVacancyLoss;
+            const stressMgmtFees = stressEffectiveRent * (base.managementFee / 100);
+            const stressNetIncome = stressEffectiveRent - stressMgmtFees;
+
+            const stressPayment = base.loanAmount > 0
+                ? calculateMortgagePayment(base.loanAmount, stressRate, base.loanTerm)
+                : 0;
+
+            const stressTotalMonthlyExpenses = stressPayment +
+                base.monthlyPropertyTax +
+                base.monthlyInsurance +
+                base.hoaFees +
+                base.monthlyMaintenance +
+                base.utilities +
+                base.monthlyOther;
+
+            const stressMonthlyCashFlow = stressNetIncome - stressTotalMonthlyExpenses;
+            const stressAnnualNOI = (stressRent * 12 * (1 - stressVacancyRate / 100)) - base.annualOperatingExpenses;
+            const stressCapRate = base.purchasePrice > 0 ? (stressAnnualNOI / base.purchasePrice) * 100 : 0;
+            const stressDebtService = stressPayment * 12;
+            const stressDscr = stressDebtService > 0 ? (stressAnnualNOI / stressDebtService) : 0;
+
+            document.getElementById('stressCashFlow').textContent = formatCurrency(stressMonthlyCashFlow);
+            document.getElementById('stressCashFlow').className = stressMonthlyCashFlow >= 0 ? 'result-value positive' : 'result-value negative';
+            document.getElementById('stressDSCR').textContent = stressDscr.toFixed(2);
+            document.getElementById('stressDSCR').className = stressDscr >= 1.1 ? 'result-value positive' : 'result-value negative';
+            document.getElementById('stressCapRate').textContent = formatPercent(stressCapRate);
+
+            let note = 'Deal appears resilient under this stress case.';
+            if (stressMonthlyCashFlow < 0 || stressDscr < 1.0) {
+                note = 'Deal is vulnerable in a mild downturn. Consider lower entry price or better rent assumptions.';
+            }
+            document.getElementById('stressNotes').textContent = note;
+        }
+
+        function calculateAll() {
+            try {
+                // Get all input values with validation
+                const {
+                    purchasePrice,
+                    downPaymentPercent,
+                    interestRate,
+                    loanTerm,
+                    appreciationRate,
+                    closingCosts,
+                    monthlyRent,
+                    rentIncrease,
+                    vacancyRate,
+                    managementFee,
+                    propertyTax,
+                    insurance,
+                    hoaFees,
+                    maintenance,
+                    utilities,
+                    otherExpenses
+                } = getInputSnapshot();
+
+                // Validate inputs
+                if (purchasePrice <= 0) {
+                    alert('Please enter a valid purchase price');
+                    return;
+                }
+
+                // Calculate loan details
+                const downPayment = purchasePrice * (downPaymentPercent / 100);
+                const loanAmount = purchasePrice - downPayment;
+                const monthlyPayment = loanAmount > 0 ? calculateMortgagePayment(loanAmount, interestRate, loanTerm) : 0;
+                const totalInvestment = downPayment + closingCosts;
+
+                // Calculate monthly income
+                const vacancyLoss = monthlyRent * (vacancyRate / 100);
+                const effectiveRent = monthlyRent - vacancyLoss;
+                const mgmtFees = effectiveRent * (managementFee / 100);
+                const netRentalIncome = effectiveRent - mgmtFees;
+
+                // Calculate monthly expenses
+                const monthlyPropertyTax = propertyTax / 12;
+                const monthlyInsurance = insurance / 12;
+                const monthlyMaintenance = maintenance / 12;
+                const monthlyOther = otherExpenses / 12;
+                
+                const totalMonthlyExpenses = monthlyPayment + monthlyPropertyTax + 
+                    monthlyInsurance + hoaFees + monthlyMaintenance + utilities + monthlyOther;
+
+                // Calculate cash flow
+                const monthlyCashFlow = netRentalIncome - totalMonthlyExpenses;
+                const annualCashFlow = monthlyCashFlow * 12;
+
+                // Calculate NOI (Net Operating Income)
+                const annualOperatingExpenses = propertyTax + insurance + (hoaFees * 12) + 
+                    maintenance + (utilities * 12) + otherExpenses + (mgmtFees * 12);
+                const annualNOI = (monthlyRent * 12 * (1 - vacancyRate / 100)) - annualOperatingExpenses;
+
+                // Calculate ROI metrics
+                const capRate = purchasePrice > 0 ? (annualNOI / purchasePrice) * 100 : 0;
+                const cashOnCash = totalInvestment > 0 ? (annualCashFlow / totalInvestment) * 100 : 0;
+                const grm = (monthlyRent * 12) > 0 ? purchasePrice / (monthlyRent * 12) : 0;
+                const dscr = (monthlyPayment * 12) > 0 ? annualNOI / (monthlyPayment * 12) : 0;
+                const onePercentRule = monthlyRent >= (purchasePrice * 0.01);
+                const breakEvenRatio = (monthlyRent * 12) > 0 ? 
+                    ((annualOperatingExpenses + (monthlyPayment * 12)) / (monthlyRent * 12)) * 100 : 0;
+                const expenseRatio = (monthlyRent * 12) > 0 ? (annualOperatingExpenses / (monthlyRent * 12)) * 100 : 0;
+                const noiMargin = (monthlyRent * 12) > 0 ? (annualNOI / (monthlyRent * 12)) * 100 : 0;
+                const breakEvenRent = vacancyRate < 100 ? totalMonthlyExpenses / (1 - vacancyRate / 100) : 0;
+                
+                // First year total return including appreciation
+                const firstYearAppreciation = purchasePrice * (appreciationRate / 100);
+                const firstYearEquityPaydown = loanAmount > 0 ? calculateEquityPaydown(loanAmount, interestRate, 1) : 0;
+                const totalFirstYearReturn = annualCashFlow + firstYearAppreciation + firstYearEquityPaydown;
+                const totalROI = totalInvestment > 0 ? (totalFirstYearReturn / totalInvestment) * 100 : 0;
+
+                // Update Summary
+                document.getElementById('summaryResults').style.display = 'block';
+                document.getElementById('totalInvestment').textContent = formatCurrency(totalInvestment);
+                document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+                document.getElementById('monthlyCashFlow').textContent = formatCurrency(monthlyCashFlow);
+                document.getElementById('monthlyCashFlow').className = monthlyCashFlow >= 0 ? 'metric-value positive' : 'metric-value negative';
+                document.getElementById('capRate').textContent = formatPercent(capRate);
+                document.getElementById('expenseRatio').textContent = formatPercent(expenseRatio);
+                document.getElementById('noiMargin').textContent = formatPercent(noiMargin);
+                document.getElementById('breakEvenRent').textContent = formatCurrency(breakEvenRent);
+
+                // Update Cash Flow
+                document.getElementById('grossIncome').textContent = formatCurrency(monthlyRent);
+                document.getElementById('vacancyLoss').textContent = '-' + formatCurrency(vacancyLoss);
+                document.getElementById('mgmtFees').textContent = '-' + formatCurrency(mgmtFees);
+                document.getElementById('effectiveIncome').textContent = formatCurrency(netRentalIncome);
+                document.getElementById('mortgagePayment').textContent = '-' + formatCurrency(monthlyPayment);
+                document.getElementById('monthlyTax').textContent = '-' + formatCurrency(monthlyPropertyTax);
+                document.getElementById('monthlyInsurance').textContent = '-' + formatCurrency(monthlyInsurance);
+                document.getElementById('monthlyHOA').textContent = '-' + formatCurrency(hoaFees);
+                document.getElementById('monthlyMaintenance').textContent = '-' + formatCurrency(monthlyMaintenance);
+                document.getElementById('monthlyUtilities').textContent = '-' + formatCurrency(utilities);
+                document.getElementById('monthlyOther').textContent = '-' + formatCurrency(monthlyOther);
+                document.getElementById('netCashFlow').textContent = formatCurrency(monthlyCashFlow);
+                document.getElementById('netCashFlow').className = monthlyCashFlow >= 0 ? 'result-value positive' : 'result-value negative';
+
+                // Update ROI Metrics
+                document.getElementById('cashOnCash').textContent = formatPercent(cashOnCash);
+                document.getElementById('cashOnCash').className = cashOnCash >= 8 ? 'result-value positive' : 'result-value';
+                document.getElementById('capRateROI').textContent = formatPercent(capRate);
+                document.getElementById('capRateROI').className = capRate >= 6 ? 'result-value positive' : 'result-value';
+                document.getElementById('grm').textContent = grm.toFixed(2);
+                document.getElementById('dscr').textContent = dscr.toFixed(2);
+                document.getElementById('dscr').className = dscr >= 1.25 ? 'result-value positive' : 'result-value';
+                document.getElementById('onePercentRule').textContent = onePercentRule ? 'Yes ✓' : 'No ✗';
+                document.getElementById('onePercentRule').className = onePercentRule ? 'result-value positive' : 'result-value negative';
+                document.getElementById('breakEvenRatio').textContent = formatPercent(breakEvenRatio);
+                document.getElementById('annualNOI').textContent = formatCurrency(annualNOI);
+                document.getElementById('totalROI').textContent = formatPercent(totalROI);
+                document.getElementById('totalROI').className = totalROI >= 15 ? 'result-value positive' : 'result-value';
+
+                // Calculate 5-year projection
+                calculate5YearProjection(purchasePrice, loanAmount, interestRate, monthlyRent, 
+                    rentIncrease, appreciationRate, monthlyCashFlow, totalInvestment);
+
+                // Calculate Investment Score
+                calculateInvestmentScore(capRate, cashOnCash, dscr, onePercentRule, monthlyCashFlow, totalROI);
+
+                renderStressTest({
+                    purchasePrice,
+                    monthlyRent,
+                    vacancyRate,
+                    managementFee,
+                    interestRate,
+                    loanAmount,
+                    loanTerm,
+                    monthlyPropertyTax,
+                    monthlyInsurance,
+                    hoaFees,
+                    monthlyMaintenance,
+                    utilities,
+                    monthlyOther,
+                    annualOperatingExpenses
+                });
+
+                lastAnalysisSnapshot = {
+                    timestamp: new Date().toISOString(),
+                    inputs: getInputSnapshot(),
+                    results: {
+                        totalInvestment,
+                        monthlyPayment,
+                        monthlyCashFlow,
+                        capRate,
+                        cashOnCash,
+                        dscr,
+                        breakEvenRatio,
+                        expenseRatio,
+                        noiMargin,
+                        breakEvenRent,
+                        totalROI,
+                        investmentScore: document.getElementById('scoreValue').textContent
+                    }
+                };
+                
+            } catch (error) {
+                console.error('Calculation error:', error);
+                alert('An error occurred during calculation. Please check your inputs.');
+            }
+        }
+
+        function calculateEquityPaydown(loanAmount, interestRate, year) {
+            if (loanAmount <= 0 || year <= 0) return 0;
+            
+            const monthlyRate = interestRate / 100 / 12;
+            let balance = loanAmount;
+            let totalPrincipal = 0;
+            
+            for (let month = 1; month <= year * 12; month++) {
+                const interest = balance * monthlyRate;
+                const payment = calculateMortgagePayment(loanAmount, interestRate, 30);
+                const principal = payment - interest;
+                totalPrincipal += principal;
+                balance -= principal;
+                
+                if (balance <= 0) break;
+            }
+            
+            return totalPrincipal;
+        }
+
+        function calculate5YearProjection(purchasePrice, loanAmount, interestRate, monthlyRent, 
+            rentIncrease, appreciationRate, monthlyCashFlow, totalInvestment) {
+            
+            const tbody = document.getElementById('projectionTable');
+            tbody.innerHTML = '';
+            
+            let currentValue = purchasePrice;
+            let currentRent = monthlyRent;
+            let currentCashFlow = monthlyCashFlow;
+            let balance = loanAmount;
+            let cumulativeReturn = 0;
+            let previousEquityPaydown = 0;
+            
+            for (let year = 1; year <= 5; year++) {
+                // Property appreciation
+                currentValue = currentValue * (1 + appreciationRate / 100);
+                
+                // Rent increase
+                if (year > 1) {
+                    currentRent = currentRent * (1 + rentIncrease / 100);
+                    currentCashFlow = currentCashFlow * (1 + rentIncrease / 100); // Simplified
+                }
+                
+                // Calculate equity
+                const currentEquityPaydown = calculateEquityPaydown(loanAmount, interestRate, year);
+                const yearlyEquityPaydown = currentEquityPaydown - previousEquityPaydown;
+                previousEquityPaydown = currentEquityPaydown;
+                
+                balance = loanAmount - currentEquityPaydown;
+                const equity = currentValue - balance;
+                
+                // Calculate total return
+                const annualCashFlow = currentCashFlow * 12;
+                const yearlyAppreciation = currentValue - (year === 1 ? purchasePrice : 
+                    purchasePrice * Math.pow(1 + appreciationRate / 100, year - 1));
+                cumulativeReturn += annualCashFlow + yearlyEquityPaydown;
+                
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>Year ${year}</td>
+                    <td>${formatCurrency(currentValue)}</td>
+                    <td>${formatCurrency(currentRent)}/mo</td>
+                    <td>${formatCurrency(annualCashFlow)}</td>
+                    <td>${formatCurrency(equity)}</td>
+                    <td>${formatCurrency(cumulativeReturn)}</td>
+                `;
+            }
+        }
+
+        function calculateInvestmentScore(capRate, cashOnCash, dscr, onePercentRule, monthlyCashFlow, totalROI) {
+            let score = 0;
+            
+            // Cap Rate (0-20 points)
+            if (capRate >= 10) score += 20;
+            else if (capRate >= 8) score += 15;
+            else if (capRate >= 6) score += 10;
+            else if (capRate >= 4) score += 5;
+            
+            // Cash on Cash Return (0-20 points)
+            if (cashOnCash >= 12) score += 20;
+            else if (cashOnCash >= 10) score += 15;
+            else if (cashOnCash >= 8) score += 10;
+            else if (cashOnCash >= 6) score += 5;
+            
+            // DSCR (0-20 points)
+            if (dscr >= 1.5) score += 20;
+            else if (dscr >= 1.25) score += 15;
+            else if (dscr >= 1.0) score += 10;
+            else if (dscr >= 0.9) score += 5;
+            
+            // 1% Rule (0-15 points)
+            if (onePercentRule) score += 15;
+            else score += 5;
+            
+            // Positive Cash Flow (0-15 points)
+            if (monthlyCashFlow >= 500) score += 15;
+            else if (monthlyCashFlow >= 250) score += 10;
+            else if (monthlyCashFlow >= 0) score += 5;
+            
+            // Total ROI (0-10 points)
+            if (totalROI >= 20) score += 10;
+            else if (totalROI >= 15) score += 7;
+            else if (totalROI >= 10) score += 5;
+            else if (totalROI >= 5) score += 2;
+            
+            // Update display
+            document.getElementById('scoreValue').textContent = Math.round(score);
+            
+            // Animate score circle
+            const circle = document.getElementById('scoreCircle');
+            const circumference = 408;
+            const offset = circumference - (score / 100) * circumference;
+            
+            setTimeout(() => {
+                circle.style.strokeDashoffset = offset;
+                circle.style.transition = 'stroke-dashoffset 1s ease';
+            }, 100);
+            
+            let label = '';
+            let color = '';
+            if (score >= 90) {
+                label = 'Excellent Investment';
+                color = '#10b981';
+            } else if (score >= 75) {
+                label = 'Good Investment';
+                color = '#3b82f6';
+            } else if (score >= 60) {
+                label = 'Fair Investment';
+                color = '#f59e0b';
+            } else {
+                label = 'Poor Investment';
+                color = '#ef4444';
+            }
+            
+            document.getElementById('scoreValue').style.color = color;
+            circle.style.stroke = color;
+            document.getElementById('scoreLabel').textContent = label;
+        }
+
+        function saveAnalysis() {
+            if (!lastAnalysisSnapshot) {
+                calculateAll();
+            }
+
+            const data = {
+                timestamp: new Date().toISOString(),
+                brand: 'VeeCasa',
+                propertyDetails: {
+                    purchasePrice: document.getElementById('purchasePrice').value,
+                    downPaymentPercent: document.getElementById('downPaymentPercent').value,
+                    interestRate: document.getElementById('interestRate').value,
+                    loanTerm: document.getElementById('loanTerm').value,
+                    appreciationRate: document.getElementById('appreciationRate').value,
+                    closingCosts: document.getElementById('closingCosts').value
+                },
+                rentalIncome: {
+                    monthlyRent: document.getElementById('monthlyRent').value,
+                    rentIncrease: document.getElementById('rentIncrease').value,
+                    vacancyRate: document.getElementById('vacancyRate').value,
+                    managementFee: document.getElementById('managementFee').value
+                },
+                expenses: {
+                    propertyTax: document.getElementById('propertyTax').value,
+                    insurance: document.getElementById('insurance').value,
+                    hoaFees: document.getElementById('hoaFees').value,
+                    maintenance: document.getElementById('maintenance').value,
+                    utilities: document.getElementById('utilities').value,
+                    otherExpenses: document.getElementById('otherExpenses').value
+                },
+                results: {
+                    monthlyCashFlow: document.getElementById('monthlyCashFlow').textContent,
+                    capRate: document.getElementById('capRate').textContent,
+                    totalROI: document.getElementById('totalROI').textContent,
+                    investmentScore: document.getElementById('scoreValue').textContent
+                },
+                stressTest: {
+                    stressCashFlow: document.getElementById('stressCashFlow').textContent,
+                    stressDSCR: document.getElementById('stressDSCR').textContent,
+                    stressCapRate: document.getElementById('stressCapRate').textContent
+                },
+                snapshot: lastAnalysisSnapshot
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'veecasa-analysis-' + new Date().getTime() + '.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function exportReportCSV() {
+            if (!lastAnalysisSnapshot) {
+                calculateAll();
+            }
+
+            const snapshot = lastAnalysisSnapshot || { inputs: {}, results: {} };
+            const rows = [
+                ['Brand', 'VeeCasa'],
+                ['Generated At', new Date().toISOString()],
+                ['Purchase Price', snapshot.inputs.purchasePrice || 0],
+                ['Monthly Rent', snapshot.inputs.monthlyRent || 0],
+                ['Down Payment %', snapshot.inputs.downPaymentPercent || 0],
+                ['Interest Rate %', snapshot.inputs.interestRate || 0],
+                ['Monthly Cash Flow', (snapshot.results.monthlyCashFlow || 0).toFixed ? snapshot.results.monthlyCashFlow.toFixed(2) : snapshot.results.monthlyCashFlow],
+                ['Cap Rate %', (snapshot.results.capRate || 0).toFixed ? snapshot.results.capRate.toFixed(2) : snapshot.results.capRate],
+                ['Cash-on-Cash %', (snapshot.results.cashOnCash || 0).toFixed ? snapshot.results.cashOnCash.toFixed(2) : snapshot.results.cashOnCash],
+                ['DSCR', (snapshot.results.dscr || 0).toFixed ? snapshot.results.dscr.toFixed(2) : snapshot.results.dscr],
+                ['Total ROI %', (snapshot.results.totalROI || 0).toFixed ? snapshot.results.totalROI.toFixed(2) : snapshot.results.totalROI],
+                ['Investment Score', snapshot.results.investmentScore || '--'],
+                ['Stress Cash Flow', document.getElementById('stressCashFlow').textContent],
+                ['Stress DSCR', document.getElementById('stressDSCR').textContent],
+                ['Stress Cap Rate', document.getElementById('stressCapRate').textContent]
+            ];
+
+            const csv = rows
+                .map((row) => row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(','))
+                .join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `veecasa-deal-report-${Date.now()}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function resetForm() {
+            if (confirm('Are you sure you want to reset all values to defaults?')) {
+                document.getElementById('purchasePrice').value = 350000;
+                document.getElementById('downPaymentPercent').value = 20;
+                document.getElementById('interestRate').value = 7.0;
+                document.getElementById('loanTerm').value = 30;
+                document.getElementById('appreciationRate').value = 3;
+                document.getElementById('closingCosts').value = 5000;
+                document.getElementById('monthlyRent').value = 2500;
+                document.getElementById('rentIncrease').value = 3;
+                document.getElementById('vacancyRate').value = 5;
+                document.getElementById('managementFee').value = 8;
+                document.getElementById('propertyTax').value = 4200;
+                document.getElementById('insurance').value = 1200;
+                document.getElementById('hoaFees').value = 0;
+                document.getElementById('maintenance').value = 3500;
+                document.getElementById('utilities').value = 0;
+                document.getElementById('otherExpenses').value = 500;
+                calculateAll();
+            }
+        }
+
+        // Auto-calculate on input change with debouncing
+        let calculateTimeout;
+        function debounceCalculate() {
+            clearTimeout(calculateTimeout);
+            calculateTimeout = setTimeout(calculateAll, 500);
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add listeners to all calculation inputs
+            const inputs = document.querySelectorAll('input[type="number"], select');
+            inputs.forEach(input => {
+                if (input.id && !input.id.includes('search')) {
+                    input.addEventListener('input', debounceCalculate);
+                    input.addEventListener('change', calculateAll);
+                }
+            });
+
+            // Initial calculation
+            refreshScenarioList();
+            calculateAll();
+
+            // Handle iOS standalone mode
+            if (window.navigator.standalone) {
+                document.body.classList.add('standalone');
+            }
+
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+
+        // Prevent zoom on input focus for iOS
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        });
+
+        // Handle offline mode
+        window.addEventListener('online', () => {
+            console.log('Back online');
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('Offline mode - app will continue to work');
+        });
+    </script>
+</body>
+</html>

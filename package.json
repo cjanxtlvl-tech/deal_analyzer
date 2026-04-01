@@ -1,0 +1,20 @@
+{
+  "name": "veecasa-deal-analyzer",
+  "version": "1.0.0",
+  "description": "VeeCasa deal analyzer served via lightweight Express wrapper",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "veecasa",
+    "deal-analyzer",
+    "real-estate",
+    "express"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
