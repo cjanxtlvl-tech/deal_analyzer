@@ -130,7 +130,7 @@
         }
 
         // Property Search Functionality
-        function searchProperties() {
+        async function searchProperties() {
             const location = document.getElementById('searchLocation').value;
             const propertyType = document.getElementById('propertyType').value;
             const priceRange = document.getElementById('priceRange').value;
@@ -146,12 +146,30 @@
             document.getElementById('searchLoading').classList.add('active');
             document.getElementById('propertyList').innerHTML = '';
 
-            // Simulate API call with sample data
-            setTimeout(() => {
+            try {
+                const params = new URLSearchParams({
+                    location,
+                    propertyType,
+                    priceRange,
+                    bedrooms
+                });
+
+                const response = await fetch(`/api/properties/search?${params.toString()}`);
+                const body = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(body.error || 'Unable to search properties right now.');
+                }
+
+                const properties = Array.isArray(body.properties) ? body.properties : [];
+                displaySearchResults(properties, body.source);
+            } catch (error) {
                 const sampleProperties = generateSampleProperties(location, propertyType, priceRange);
-                displaySearchResults(sampleProperties);
+                displaySearchResults(sampleProperties, 'mock');
+                alert(error.message || 'Search API unavailable. Showing sample properties.');
+            } finally {
                 document.getElementById('searchLoading').classList.remove('active');
-            }, 1500);
+            }
         }
 
         function generateSampleProperties(location, type, priceRange) {
@@ -207,9 +225,19 @@
             return properties;
         }
 
-        function displaySearchResults(properties) {
+        function displaySearchResults(properties, source = 'mock') {
             const propertyList = document.getElementById('propertyList');
-            propertyList.innerHTML = '<h3 style="margin-bottom: 15px;">Found ' + properties.length + ' Comparable Properties</h3>';
+
+            if (!Array.isArray(properties) || properties.length === 0) {
+                propertyList.innerHTML = '<h3 style="margin-bottom: 10px;">No Comparable Properties Found</h3><p style="color:#6b7280;">Try widening your filters or location.</p>';
+                return;
+            }
+
+            const sourceBadge = source === 'idx'
+                ? '<span style="font-size:12px;color:#065f46;background:#d1fae5;padding:3px 8px;border-radius:999px;">IDX</span>'
+                : '<span style="font-size:12px;color:#92400e;background:#fef3c7;padding:3px 8px;border-radius:999px;">Sample Data</span>';
+
+            propertyList.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;"><h3>Found ' + properties.length + ' Comparable Properties</h3>' + sourceBadge + '</div>';
 
             properties.forEach(property => {
                 const card = document.createElement('div');
@@ -425,6 +453,73 @@
             setSavedScenarios(remaining);
             refreshScenarioList();
             document.getElementById('scenarioName').value = '';
+        }
+
+        function exportScenarioCSV() {
+            const scenarios = getSavedScenarios();
+            if (!Array.isArray(scenarios) || scenarios.length === 0) {
+                alert('No scenarios to export. Save a scenario first.');
+                return;
+            }
+
+            const rows = [
+                [
+                    'Scenario ID',
+                    'Scenario Name',
+                    'Updated At',
+                    'Purchase Price',
+                    'Down Payment %',
+                    'Interest Rate %',
+                    'Loan Term',
+                    'Monthly Rent',
+                    'Rent Increase %',
+                    'Vacancy Rate %',
+                    'Management Fee %',
+                    'Property Tax',
+                    'Insurance',
+                    'HOA Fees',
+                    'Maintenance',
+                    'Utilities',
+                    'Other Expenses'
+                ]
+            ];
+
+            scenarios.forEach((scenario) => {
+                const inputs = scenario.inputs || {};
+                rows.push([
+                    scenario.id || '',
+                    scenario.name || '',
+                    scenario.updatedAt || '',
+                    inputs.purchasePrice || 0,
+                    inputs.downPaymentPercent || 0,
+                    inputs.interestRate || 0,
+                    inputs.loanTerm || 0,
+                    inputs.monthlyRent || 0,
+                    inputs.rentIncrease || 0,
+                    inputs.vacancyRate || 0,
+                    inputs.managementFee || 0,
+                    inputs.propertyTax || 0,
+                    inputs.insurance || 0,
+                    inputs.hoaFees || 0,
+                    inputs.maintenance || 0,
+                    inputs.utilities || 0,
+                    inputs.otherExpenses || 0
+                ]);
+            });
+
+            const csv = rows
+                .map((row) => row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(','))
+                .join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `veecasa-scenarios-${Date.now()}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
         }
 
         function renderStressTest(base) {

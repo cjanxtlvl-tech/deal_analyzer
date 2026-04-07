@@ -66,6 +66,7 @@
                 <a href="#results">Rates</a>
                 <a href="#analyze">How It Works</a>
                 <a href="#">FAQ</a>
+                <button class="save-btn" onclick="exportReportCSV()">Export CSV</button>
                 <button class="save-btn" onclick="document.getElementById('leadForm').scrollIntoView({behavior:'smooth'})">Start My Quote →</button>
             </div>
         </div>
@@ -347,6 +348,7 @@
                     <button class="btn" type="button" onclick="saveScenario()">Save</button>
                     <button class="btn btn-secondary" type="button" onclick="loadSelectedScenario()">Load</button>
                     <button class="btn btn-danger" type="button" onclick="deleteScenario()">Delete</button>
+                    <button class="btn btn-secondary" type="button" onclick="exportScenarioCSV()">Export Scenarios CSV</button>
                 </div>
                 <p class="muted-text">Scenarios are stored in your browser on this device.</p>
             </div>
