@@ -238,6 +238,16 @@
             box-shadow: 0 8px 20px rgba(18, 50, 107, 0.35);
         }
 
+        .subscribe-btn {
+            margin-top: 10px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            text-decoration: none;
+        }
+
+        .subscribe-btn:hover {
+            box-shadow: 0 8px 20px rgba(11, 95, 255, 0.3);
+        }
+
         /* Search Results */
         .search-results {
             display: none;

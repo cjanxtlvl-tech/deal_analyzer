@@ -261,6 +261,16 @@
             box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
         }
 
+        .subscribe-btn {
+            margin-top: 10px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            text-decoration: none;
+        }
+
+        .subscribe-btn:hover {
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+        }
+
         /* Search Results */
         .search-results {
             display: none;
@@ -881,9 +891,11 @@
                 🏡 VeeCasa Real Estate Analyzer
             </div>
             <div class="nav-links">
-                <a href="#search">Search Properties</a>
-                <a href="#analyze">Analyze</a>
-                <a href="#results">Results</a>
+                <a href="https://veecasa.com">Home</a>
+                <a href="https://veecasa.com/form/">Products</a>
+                <a href="https://veecasa.com/#rates">Rates</a>
+                <a href="https://veecasa.com/#how-it-works">How It Works</a>
+                <a href="https://veecasa.com/#faq">FAQ</a>
                 <button class="save-btn" onclick="saveAnalysis()">💾 Save Analysis</button>
                 <button class="save-btn" onclick="exportReportCSV()">📄 Export CSV</button>
             </div>
@@ -900,7 +912,7 @@
         <!-- Property Search Section -->
         <div id="search" class="search-section">
             <div class="search-header">
-                <h2>🔍 Search Comparable Properties</h2>
+                <h2>🔍 Search Comparable Properties (subscription required)</h2>
                 <span style="color: #6b7280; font-size: 0.9em;">Find similar deals in your area</span>
             </div>
             
@@ -945,6 +957,9 @@
                     <button class="search-btn" onclick="searchProperties()">
                         🔍 Search
                     </button>
+                    <a class="search-btn subscribe-btn" href="https://veecasa.com/contact-us/" target="_blank" rel="noopener noreferrer">
+                        📝 Subscribe
+                    </a>
                 </div>
             </div>
 
